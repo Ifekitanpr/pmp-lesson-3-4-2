@@ -45,29 +45,29 @@ const techniques = [
     name: "One-to-one conversations",
     icon: Users,
     image: oneToOne,
-    kicker: "PRIVATE SPACE",
-    text: "Create the private space where people say what they would not say in a group. Polite agreement in a steering meeting can become an honest concern one-to-one.",
+    kicker: "One-to-One Conversations",
+    text: "Create the private space where people say things they wouldn't say in a group. A stakeholder who voices polite agreement in a steering committee meeting may, one-to-one, reveal a concern they were unwilling to raise publicly.",
   },
   {
     name: "Open questions",
     icon: MessageCircleQuestion,
     image: openQuestions,
-    kicker: "INVITE, DON'T CONFIRM",
-    text: "Ask “What does success look like to you?” rather than “Are you comfortable?” Open questions surface expectations instead of confirming the PM’s assumptions.",
+    kicker: "Open Questions",
+    text: "Invite expectations to surface rather than confirming assumptions the PM has already made. \"Are you comfortable with the timeline?\" invites a yes-or-no answer. \"What does success look like to you for this project?\" invites something that might never have come up otherwise.",
   },
   {
     name: "Active listening",
     icon: Ear,
     image: activeListening,
-    kicker: "HEAR THE WHOLE MESSAGE",
-    text: "Listen for tone, hesitation, and what is left unsaid—not only literal words. A complaint often points toward something deeper than the complaint itself.",
+    kicker: "Active Listening",
+    text: "Means hearing what's actually being communicated — tone, hesitation, what's left unsaid — not just processing the literal words. A stakeholder's complaint often points toward something deeper than the complaint itself.",
   },
   {
     name: "A safe climate",
     icon: ShieldCheck,
     image: safeClimate,
-    kicker: "MAKE HONESTY SAFE",
-    text: "People reveal what they want or fear only when they trust it will not be dismissed or used against them. Building that trust is part of the PM’s job.",
+    kicker: "A Safe Climate",
+    text: "The precondition for all three above. People only admit what they really want or fear when they trust it won't be used against them or dismissed. Building that trust is itself part of the PM's job — and connects directly to PMBOK® 8's principle of building an empowered culture.",
   },
 ];
 const q1 = {
@@ -79,8 +79,8 @@ const q1 = {
     "Assume “fine” means there is nothing more",
   ],
   correct: 1,
-  yes: "Right—the private setting and open question both invite what the group setting suppresses.",
-  no: "Reconsider: both the setting and the question type matter.",
+  yes: "Right — group settings and closed questions both suppress exactly the kind of disclosure a private conversation and an open question are designed to invite.",
+  no: "Reconsider — the setting and the question type both matter here. A group meeting and a closed question both work against surfacing anything unstated.",
 };
 const q2 = {
   q: "The PM adds walk-in features, but the franchise owner's resistance continues. What is the most likely explanation?",
@@ -91,8 +91,8 @@ const q2 = {
     "More walk-in features are needed",
   ],
   correct: 1,
-  yes: "Exactly—the surface complaint was not the real driver.",
-  no: "Think about what was actually driving the resistance, not only the feature request.",
+  yes: "Exactly — this is the pattern the enabler is built around: the expectations that sink projects are almost always the ones nobody said out loud, and addressing the stated version alone leaves the real driver untouched.",
+  no: "Think about what was actually driving the resistance — it was never really about the feature set.",
 };
 function Modal({ detail, onClose, onRead }) {
   useEffect(() => {
@@ -171,7 +171,7 @@ function Quiz({ data, onFinish }) {
             {pick === data.correct ? data.yes : data.no}
           </p>
         )}
-        {pick === data.correct && (
+        {pick !== null && (
           <button className="finish-check" onClick={onFinish}>
             Finish check <ArrowRight />
           </button>
@@ -312,26 +312,17 @@ function App() {
                 {page === 0 && (
                   <div className="comm-hero">
                     <div>
-                      <p className="eyebrow">
-                        LESSON 3.4.2 · IDENTIFY STAKEHOLDER EXPECTATIONS
-                      </p>
-                      <h1>
-                        The visible expectation is only <em>the tip.</em>
-                      </h1>
-                      <p>
-                        An iceberg shows only a fraction of its mass. Navigating
-                        by what is visible means betting the hidden nine-tenths
-                        matches your assumptions.
-                      </p>
+                      <p className="eyebrow">LESSON 3.4.2</p>
+                      <h1>Identify Stakeholder Expectations</h1>
+                      <p>An iceberg shows you maybe a tenth of its actual mass above the waterline. A ship's crew that charts a course based only on what's visible isn't navigating safely — they're navigating on a guess, betting that the nine-tenths they can't see happens to line up with what they assumed.</p>
                       <button
                         className="primary compact-cta"
                         onClick={() =>
                           reveal(0, {
                             title: "Stakeholder expectations work the same way",
-                            kicker: "THE HIDDEN MASS",
+                            kicker: "CLICK-TO-REVEAL",
                             image: icebergReveal,
-                            text: "What a stakeholder says aloud is only the visible tip. Below it sit assumptions about how decisions will be made, fears about status or control, political needs, previous experiences, and private definitions of success. These hidden expectations shape support and resistance even when they never appear in a requirement or meeting note.",
-                            note: "The task is not to guess the hidden mass. It is to create the conditions and use the techniques that bring it safely into view.",
+                            text: "Stakeholder expectations work exactly the same way. What a stakeholder says out loud — in a meeting, in the charter, in a requirements document — is the tenth above the waterline. The assumptions, fears, and private definitions of success sitting beneath it are the mass that actually determines whether the project stays on course or runs into something nobody saw coming. That gap between what's said and what's actually expected, feared, or assumed is exactly what this enabler exists to close.",
                           })
                         }
                       >
@@ -347,24 +338,17 @@ function App() {
                 {page === 1 && (
                   <div className="calibration">
                     <div>
-                      <p className="eyebrow">STATED VS. UNSTATED</p>
-                      <h2>
-                        Shared understanding needs <em>the whole picture.</em>
-                      </h2>
-                      <p>
-                        Stated expectations live in charters, meetings, and
-                        requirements. Unstated expectations live in assumptions,
-                        fears, political needs, and private definitions of
-                        success.
-                      </p>
+                      <p className="eyebrow">SCREEN 2</p>
+                      <h2>Stated vs. Unstated</h2>
+                      <p>The second enabler of ECO People Task 5 asks the project manager to identify stakeholder expectations — and it draws a hard line between two very different categories.</p>
                       <button
                         className="primary compact-cta"
                         onClick={() =>
                           reveal(1, {
-                            title: "You cannot share what stays hidden",
-                            kicker: "PMBOK® 8 · SHARED UNDERSTANDING",
+                            title: "Stated expectations and unstated expectations",
+                            kicker: "CLICK-TO-REVEAL",
                             image: statedReveal,
-                            text: "The second enabler under ECO People Task 5 is to identify stakeholder expectations. Stated expectations appear in charters, requirements, agreements, and conversations; unstated expectations remain in people’s heads. PMBOK® 8 emphasizes shared understanding, which is possible only when both kinds are surfaced, tested, and reconciled.",
+                            text: "Stated expectations are the easy ones. They're written in the charter, said out loud in meetings, captured in requirements documents — everyone can point to them. Unstated expectations are the dangerous ones: the assumptions, the fears, the political needs, and the private definitions of success that nobody has put into words — sometimes because the stakeholder hasn't fully articulated them even to themselves. This connects directly to PMBOK® 8's emphasis on shared understanding — holding the project's purpose and benefits in common across the team and stakeholders. But shared understanding is only possible when expectations are actually on the table. You cannot share an understanding that half your stakeholders are quietly keeping in their heads.",
                           })
                         }
                       >
@@ -379,11 +363,9 @@ function App() {
                 )}
                 {page === 2 && (
                   <div className="wide">
-                    <p className="eyebrow">SURFACE THE UNSTATED</p>
-                    <h2>Honesty takes deliberate technique.</h2>
-                    <p className="lede">
-                      Open each technique and mark it as read.
-                    </p>
+                    <p className="eyebrow">SCREEN 3</p>
+                    <h2>How to Surface the Unstated</h2>
+                    <p className="lede">Surfacing what nobody's saying doesn't happen by accident in a group status meeting — it takes deliberate technique, applied on purpose. Click each one to see how it works.</p>
                     <div className="direct-card-grid">
                       {techniques.map((t, i) => {
                         const I = t.icon;
@@ -440,7 +422,7 @@ function App() {
                           <ShieldCheck />
                           <span><b>FEAR</b><small>What could threaten their position, control, or success?</small></span>
                         </div>
-                        <p>Capture what is driving the stakeholder—not only what they were willing to say in the meeting.</p>
+                        <p>The output of this enabler is an honest expectation map — for each key stakeholder or group, what they expect, what they assume, and what they fear. Not just what they've said. What's actually driving their position.</p>
                       </div>
                     )}
                     {map && !qOne && (
@@ -455,24 +437,22 @@ function App() {
                 )}
                 {page === 3 && (
                   <div className="wide">
-                    <p className="eyebrow">
-                      CASE IN POINT · THE FRANCHISE OWNER
-                    </p>
-                    <h2>The complaint and the driver are not the same.</h2>
-                    <p className="lede">Flip both cards to see why.</p>
+                    <p className="eyebrow">SCREEN 4</p>
+                    <h2>Case in Point: The Franchise Owner</h2>
+                    <p className="lede">Back to that franchise owner from the opening. His actual words, taken at face value, would have sent the project in the wrong direction entirely. Flip both cards to see why.</p>
                     <div className="flip-grid">
                       {[
                         {
                           name: "The stated complaint",
                           front: "“This app ignores walk-in customers.”",
                           image: statedComplaintCard,
-                          back: "Taken literally, this sounds like a product requirement: add walk-in functionality. The statement is real, but treating it as the complete expectation risks solving the visible symptom while leaving the stakeholder’s resistance untouched.",
+                          back: "\"This app ignores walk-in customers.\" Taken at face value, this sounds like a feature gap — the fix looks like adding functionality for walk-in traffic.",
                         },
                         {
                           name: "The unstated fear",
                           front: "Dig one layer deeper.",
                           image: unstatedFearCard,
-                          back: "A private conversation reveals the deeper fear: “I’m losing control over my own customer relationships.” That expectation calls for reassurance, involvement in decisions, clear ownership boundaries, and evidence—not merely another feature.",
+                          back: "Dig one layer deeper, through a one-to-one conversation and active listening, and what actually surfaces is: \"I'm losing control over my own customer relationships.\" A completely different problem, with a completely different fix.",
                         },
                       ].map((f, i) => (
                         <div className="illustrated-flip" key={f.name}>
@@ -501,10 +481,7 @@ function App() {
                     </div>
                     {flips.length === 2 && (
                       <div className="backing">
-                        A product fix cannot resolve a fear about control. The
-                        stated complaint informs the solution, but the unstated
-                        expectation explains the resistance. Address both the
-                        request and the real driver beneath it.
+                        Those are two very different problems. The stated complaint suggests a product fix. The unstated fear suggests something else entirely — reassurance, involvement in decisions, evidence that the franchise owner's role isn't being displaced. A PM who only addresses the stated complaint may genuinely believe the issue is resolved — and be blindsided when resistance continues, because the actual driver was never touched.
                       </div>
                     )}
                     {flips.length === 2 && !qTwo && (
@@ -524,39 +501,35 @@ function App() {
                       alt="Spoken and unspoken expectations merge into shared understanding"
                     />
                     <div>
-                      <p className="eyebrow">EXAM LENS · EXPECTATIONS</p>
-                      <h2>
-                        The expectations that sink projects are the ones nobody
-                        said out loud.
-                      </h2>
-                      <p className="lede">Identification goes beyond recording requests. It uncovers what stakeholders expect, assume, and fear so the team can build genuine shared understanding.</p>
+                      <p className="eyebrow">SCREEN 5 · SYNTHESIS (EXAM LENS)</p>
+                      <h2>One line sums up everything this enabler is built around — and it's worth carrying into the exam room exactly as stated.</h2>
                       <button
                         className="primary compact-cta"
                         onClick={() => setDone(true)}
                       >
                         {done
                           ? "Expectation map complete"
-                          : "Reveal the exam rules"}
+                          : "Reveal the synthesis"}
                         <Sparkles />
                       </button>
                       {done && (
+                        <>
+                        <p className="exam-synthesis">The expectations that sink projects are the ones nobody said out loud. A stated position captured in a meeting is only ever part of the picture. The unstated assumptions, fears, and private definitions of success sitting underneath it are where real alignment — or real conflict — actually lives. Use one-to-one conversations. Ask open questions. Listen actively, for what's said and what isn't. Build the trust that makes honesty safe. And produce an honest expectation map — not just a record of what stakeholders were willing to say in front of everyone else.</p>
+                        <h3>Exam-relevant enablers to remember:</h3>
                         <ul>
                           <li>
-                            Distinguish stated expectations from unstated
-                            assumptions and fears.
+                            Distinguish stated expectations (charter, meetings, requirements) from unstated ones (assumptions, fears, private definitions of success)
                           </li>
                           <li>
-                            Use one-to-one settings, open questions, active
-                            listening, and a safe climate.
+                            Surfacing the unstated takes technique: one-to-one settings, open questions, active listening, and a safe climate
                           </li>
                           <li>
-                            Map what stakeholders expect, assume, and fear.
+                            The deliverable is an honest expectation map — expect, assume, and fear, not just what was said
                           </li>
                           <li>
-                            Address the real driver, not only the stated
-                            complaint.
+                            A stated complaint and an unstated fear can point to two completely different fixes — address the real driver, not just the surface version
                           </li>
-                        </ul>
+                        </ul></>
                       )}
                     </div>
                   </div>

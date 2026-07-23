@@ -91,3 +91,12 @@ button:focus-visible,input:focus-visible{outline:3px solid #007bff;outline-offse
 .illustrated-flip .flip-front h3,.illustrated-flip .flip-back h3{margin:6px 0 10px}
 .illustrated-flip .flip-back p{margin:0;line-height:1.48}
 @media(max-width:800px){.illustrated-flip>.flip-card-art{height:150px}.illustrated-flip>.flip{height:330px}}
+
+/* Canonical storyboard copy determines layout and component height */
+.expectation-page .comm-hero h1{font-size:clamp(40px,4.2vw,60px);line-height:1.02}
+.detail-modal{overflow-y:auto}
+.expectation-page .illustrated-flip>.flip{height:360px}
+.expectation-page .exam{align-items:start}
+.expectation-page .exam h2{font-size:clamp(28px,3vw,42px)}
+.exam-synthesis{margin:18px 0;color:#475569;line-height:1.6}
+.expectation-page .exam h3{margin:20px 0 8px;font-size:17px}
