@@ -21,6 +21,7 @@ import {
   X,
 } from "lucide-react";
 import "./styles.css";
+import SynthesisModal from "./SynthesisModal";
 import iceberg from "./assets/illustrations/iceberg-expectations.png";
 import stated from "./assets/illustrations/stated-unstated.png";
 import franchise from "./assets/illustrations/franchise-owner.png";
@@ -198,7 +199,8 @@ function App() {
     [qOne, setQOne] = useState(false),
     [qTwo, setQTwo] = useState(false),
     [quiz, setQuiz] = useState(null),
-    [done, setDone] = useState(false);
+    [done, setDone] = useState(false),
+    [synthesisOpen, setSynthesisOpen] = useState(false);
   const can = [
     reveals[0],
     reveals[1],
@@ -505,32 +507,12 @@ function App() {
                       <h2>One line sums up everything this enabler is built around — and it's worth carrying into the exam room exactly as stated.</h2>
                       <button
                         className="primary compact-cta"
-                        onClick={() => setDone(true)}
+                        disabled={done}
+                        onClick={() => setSynthesisOpen(true)}
                       >
-                        {done
-                          ? "Expectation map complete"
-                          : "Reveal the synthesis"}
+                        {done ? "Synthesis reviewed" : "Reveal the synthesis"}
                         <Sparkles />
                       </button>
-                      {done && (
-                        <>
-                        <p className="exam-synthesis">The expectations that sink projects are the ones nobody said out loud. A stated position captured in a meeting is only ever part of the picture. The unstated assumptions, fears, and private definitions of success sitting underneath it are where real alignment — or real conflict — actually lives. Use one-to-one conversations. Ask open questions. Listen actively, for what's said and what isn't. Build the trust that makes honesty safe. And produce an honest expectation map — not just a record of what stakeholders were willing to say in front of everyone else.</p>
-                        <h3>Exam-relevant enablers to remember:</h3>
-                        <ul>
-                          <li>
-                            Distinguish stated expectations (charter, meetings, requirements) from unstated ones (assumptions, fears, private definitions of success)
-                          </li>
-                          <li>
-                            Surfacing the unstated takes technique: one-to-one settings, open questions, active listening, and a safe climate
-                          </li>
-                          <li>
-                            The deliverable is an honest expectation map — expect, assume, and fear, not just what was said
-                          </li>
-                          <li>
-                            A stated complaint and an unstated fear can point to two completely different fixes — address the real driver, not just the surface version
-                          </li>
-                        </ul></>
-                      )}
                     </div>
                   </div>
                 )}
@@ -568,6 +550,25 @@ function App() {
             onClose={() => setDetail(null)}
             onRead={read}
           />
+        )}
+        {synthesisOpen && (
+          <SynthesisModal
+            title="Surface what stakeholders did not say"
+            onClose={() => setSynthesisOpen(false)}
+            onReviewed={() => {
+              setDone(true);
+              setSynthesisOpen(false);
+            }}
+          >
+            <p>The expectations that sink projects are the ones nobody said out loud. A stated position captured in a meeting is only ever part of the picture. The unstated assumptions, fears, and private definitions of success sitting underneath it are where real alignment — or real conflict — actually lives. Use one-to-one conversations. Ask open questions. Listen actively, for what's said and what isn't. Build the trust that makes honesty safe. And produce an honest expectation map — not just a record of what stakeholders were willing to say in front of everyone else.</p>
+            <h4>Exam-relevant enablers to remember:</h4>
+            <ul>
+              <li>Distinguish stated expectations (charter, meetings, requirements) from unstated ones (assumptions, fears, private definitions of success)</li>
+              <li>Surfacing the unstated takes technique: one-to-one settings, open questions, active listening, and a safe climate</li>
+              <li>The deliverable is an honest expectation map — expect, assume, and fear, not just what was said</li>
+              <li>A stated complaint and an unstated fear can point to two completely different fixes — address the real driver, not just the surface version</li>
+            </ul>
+          </SynthesisModal>
         )}
       </AnimatePresence>
       {quiz && (
