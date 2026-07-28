@@ -22,18 +22,20 @@ import {
 } from "lucide-react";
 import "./styles.css";
 import SynthesisModal from "./SynthesisModal";
-import iceberg from "./assets/illustrations/iceberg-expectations.png";
-import stated from "./assets/illustrations/stated-unstated.png";
-import franchise from "./assets/illustrations/franchise-owner.png";
-import honestMap from "./assets/illustrations/honest-expectation-map-v3.png";
-import icebergReveal from "./assets/illustrations/iceberg-reveal.png";
-import statedReveal from "./assets/illustrations/stated-unstated-reveal.png";
-import oneToOne from "./assets/illustrations/one-to-one.png";
-import openQuestions from "./assets/illustrations/open-questions.png";
-import activeListening from "./assets/illustrations/active-listening.png";
-import safeClimate from "./assets/illustrations/safe-climate.png";
-import statedComplaintCard from "./assets/illustrations/stated-complaint-card.png";
-import unstatedFearCard from "./assets/illustrations/unstated-fear-card.png";
+import { useLessonAudio } from "../../shared/useLessonAudio";
+import { IllustrationPlayer } from "./components/IllustrationPlayer";
+import iceberg from "./assets/illustrations/iceberg-expectations.svg?raw";
+import stated from "./assets/illustrations/stated-unstated.svg?raw";
+import franchise from "./assets/illustrations/franchise-owner.svg?raw";
+import honestMap from "./assets/illustrations/honest-expectation-map-v3.svg?raw";
+import icebergReveal from "./assets/illustrations/iceberg-reveal.svg?raw";
+import statedReveal from "./assets/illustrations/stated-unstated-reveal.svg?raw";
+import oneToOne from "./assets/illustrations/one-to-one.svg?raw";
+import openQuestions from "./assets/illustrations/open-questions.svg?raw";
+import activeListening from "./assets/illustrations/active-listening.svg?raw";
+import safeClimate from "./assets/illustrations/safe-climate.svg?raw";
+import statedComplaintCard from "./assets/illustrations/stated-complaint-card.svg?raw";
+import unstatedFearCard from "./assets/illustrations/unstated-fear-card.svg?raw";
 const screens = [
   "Below the surface",
   "Stated vs. unstated",
@@ -121,7 +123,7 @@ function Modal({ detail, onClose, onRead }) {
           <X />
         </button>
         {detail.image && (
-          <img className="drawer-illustration" src={detail.image} alt="" />
+          <IllustrationPlayer className="drawer-illustration" svg={detail.image} />
         )}
         <p className="mini-label">{detail.kicker}</p>
         <h3>{detail.name || detail.title}</h3>
@@ -182,10 +184,8 @@ function Quiz({ data, onFinish }) {
     document.body,
   );
 }
-function Art({ src, alt, className = "" }) {
-  return (
-    <img className={`custom-lesson-art ${className}`} src={src} alt={alt} />
-  );
+function Art({ src, className = "" }) {
+  return <IllustrationPlayer className={`custom-lesson-art ${className}`} svg={src} />;
 }
 function App() {
   const [page, setPage] = useState(0),
@@ -201,6 +201,7 @@ function App() {
     [quiz, setQuiz] = useState(null),
     [done, setDone] = useState(false),
     [synthesisOpen, setSynthesisOpen] = useState(false);
+  useLessonAudio(sound);
   const can = [
     reveals[0],
     reveals[1],
@@ -322,7 +323,6 @@ function App() {
                         onClick={() =>
                           reveal(0, {
                             title: "Stakeholder expectations work the same way",
-                            kicker: "CLICK-TO-REVEAL",
                             image: icebergReveal,
                             text: "Stakeholder expectations work exactly the same way. What a stakeholder says out loud — in a meeting, in the charter, in a requirements document — is the tenth above the waterline. The assumptions, fears, and private definitions of success sitting beneath it are the mass that actually determines whether the project stays on course or runs into something nobody saw coming. That gap between what's said and what's actually expected, feared, or assumed is exactly what this enabler exists to close.",
                           })
@@ -340,7 +340,6 @@ function App() {
                 {page === 1 && (
                   <div className="calibration">
                     <div>
-                      <p className="eyebrow">SCREEN 2</p>
                       <h2>Stated vs. Unstated</h2>
                       <p>The second enabler of ECO People Task 5 asks the project manager to identify stakeholder expectations — and it draws a hard line between two very different categories.</p>
                       <button
@@ -348,7 +347,6 @@ function App() {
                         onClick={() =>
                           reveal(1, {
                             title: "Stated expectations and unstated expectations",
-                            kicker: "CLICK-TO-REVEAL",
                             image: statedReveal,
                             text: "Stated expectations are the easy ones. They're written in the charter, said out loud in meetings, captured in requirements documents — everyone can point to them. Unstated expectations are the dangerous ones: the assumptions, the fears, the political needs, and the private definitions of success that nobody has put into words — sometimes because the stakeholder hasn't fully articulated them even to themselves. This connects directly to PMBOK® 8's emphasis on shared understanding — holding the project's purpose and benefits in common across the team and stakeholders. But shared understanding is only possible when expectations are actually on the table. You cannot share an understanding that half your stakeholders are quietly keeping in their heads.",
                           })
@@ -365,7 +363,6 @@ function App() {
                 )}
                 {page === 2 && (
                   <div className="wide">
-                    <p className="eyebrow">SCREEN 3</p>
                     <h2>How to Surface the Unstated</h2>
                     <p className="lede">Surfacing what nobody's saying doesn't happen by accident in a group status meeting — it takes deliberate technique, applied on purpose. Click each one to see how it works.</p>
                     <div className="direct-card-grid">
@@ -439,7 +436,6 @@ function App() {
                 )}
                 {page === 3 && (
                   <div className="wide">
-                    <p className="eyebrow">SCREEN 4</p>
                     <h2>Case in Point: The Franchise Owner</h2>
                     <p className="lede">Back to that franchise owner from the opening. His actual words, taken at face value, would have sent the project in the wrong direction entirely. Flip both cards to see why.</p>
                     <div className="flip-grid">
@@ -458,7 +454,7 @@ function App() {
                         },
                       ].map((f, i) => (
                         <div className="illustrated-flip" key={f.name}>
-                        <img className="flip-card-art" src={f.image} alt="" />
+                        <IllustrationPlayer className="flip-card-art" svg={f.image} />
                         <button
                           className={`flip ${flips.includes(i) ? "flipped" : ""}`}
                           onClick={() =>
@@ -503,7 +499,7 @@ function App() {
                       alt="Spoken and unspoken expectations merge into shared understanding"
                     />
                     <div>
-                      <p className="eyebrow">SCREEN 5 · SYNTHESIS (EXAM LENS)</p>
+                      <p className="eyebrow">SYNTHESIS (EXAM LENS)</p>
                       <h2>One line sums up everything this enabler is built around — and it's worth carrying into the exam room exactly as stated.</h2>
                       <button
                         className="primary compact-cta"
